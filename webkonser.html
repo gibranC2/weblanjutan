@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConcertVibe</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+    }
+
+    .logo {
+      font-size: 1.5em;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    #hamburger {
+      display: none;
+      font-size: 2em;
+      cursor: pointer;
+    }
+
+    #mode-toggle {
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5em;
+    }
+
+    /* Main Content */
+    main {
+      padding: 20px;
+    }
+
+    section {
+      margin: 20px 0;
+    }
+
+    h1, h2 {
+      margin: 10px 0;
+    }
+
+    #home {
+      text-align: center;
+      padding: 50px 0;
+      background: url('https://example.com/concert.jpg') no-repeat center center/cover;
+      color: white;
+    }
+
+    #see-events {
+      padding: 10px 20px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .event {
+      background-color: white;
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .buy-ticket {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    /* Dark Mode Styles */
+    .dark-mode {
+      background-color: #121212;
+      color: white;
+    }
+
+    .dark-mode header {
+      background-color: #1c1c1c;
+    }
+
+    .dark-mode .event {
+      background-color: #1c1c1c;
+      color: white;
+    }
+
+    .dark-mode footer {
+      background-color: #1c1c1c;
+    }
+
+    /* Pop-up Box Styles */
+    .popup-box {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .popup-content .close {
+      cursor: pointer;
+      font-size: 1.5em;
+      float: right;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #333;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 200px;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      #hamburger {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body class="light-mode">
+
+  <header>
+    <div class="logo">ConcertVibe</div>
+    <nav id="navbar">
+      <ul>
+        <li><a href="#home">Beranda</a></li>
+        <li><a href="#about">Tentang Saya</a></li>
+        <li><a href="#events">Event/Tiket</a></li>
+        <li><a href="#form-section">Registrasi</a></li>
+      </ul>
+      <button id="mode-toggle">🌙</button>
+    </nav>
+    <div id="hamburger">&#9776;</div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home">
+      <h1>Beli Tiket Konser Favoritmu Sekarang!</h1>
+      <button id="see-events">Lihat Event</button>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events">
+      <h2>Upcoming Concerts</h2>
+      <div class="event">
+        <h3>Blink-182</h3>
+        <p>Tanggal: 19 November 2024</p>
+        <button class="buy-ticket">Beli Tiket</button>
+      </div>
+      <div class="event">
+        <h3>Greenday</h3>
+        <p>Tanggal: 28 November 2024</p>
+        <button class="buy-ticket">Beli Tiket</button>
+      </div>
+    </section>
+
+    <!-- Form Input Section -->
+    <section id="form-section">
+      <h2>Daftar Sekarang</h2>
+      <form id="registration-form">
+        <label for="username">Nama Pengguna:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="password">Kata Sandi:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <label for="age">Usia:</label>
+        <input type="number" id="age" name="age" min="1" required><br><br>
+        <button type="submit">Daftar</button>
+      </form>
+    </section>
+
+    <!-- Tempat menampilkan data yang disimpan -->
+    <section id="user-list" style="display: none; margin-top: 20px;">
+      <h2>Daftar Pengguna Terdaftar:</h2>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Nama Pengguna</th>
+            <th>Email</th>
+            <th>Usia</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="user-table-body">
+          <!-- Data pengguna akan ditampilkan di sini -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about">
+      <h2>Tentang Saya</h2>
+      <p>Nama: Gibran Amba Lembang</p>
+      <p>Saya penanggung jawab atas penjualan tiket tersebut.</p>
+      <p>Hubungi email yang tertera</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Buy Ticket | Contact Us: tiketkonsergibran@gmail.com</p>
+  </footer>
+
+  <!-- Pop-up Box -->
+  <div id="popup" class="popup-box">
+    <div class="popup-content">
+      <span class="close">&times;</span>
+      <h3>Detail Tiket</h3>
+      <p>Konser A</p>
+      <p>Tanggal: 20 Oktober 2024</p>
+      <label for="quantity">Jumlah Tiket:</label>
+      <input type="number" id="quantity" min="1" value="1">
+      <button>Konfirmasi Pembelian</button>
+    </div>
+  </div>
+
+  <script>
+    // Dark Mode Toggle
+    const modeToggle = document.getElementById('mode-toggle');
+    const body = document.body;
+
+    modeToggle.addEventListener('click', function () {
+      body.classList.toggle('dark-mode');
+      modeToggle.textContent = body.classList.contains('dark-mode') ? "☀️" : "🌙";
+    });
+
+    // Hamburger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navbar = document.getElementById('navbar');
+
+    hamburger.addEventListener('click', function () {
+      navbar.querySelector('ul').classList.toggle('active');
+    });
+
+    // Pop-up Box for Ticket Purchase
+    const buyButtons = document.querySelectorAll('.buy-ticket');
+    const popup = document.getElementById('popup');
+    const closePopup = document.querySelector('.popup-content .close');
+
+    buyButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        popup.style.display = 'flex';
+      });
+    });
+
+    closePopup.addEventListener('click', function () {
+      popup.style.display = 'none';
+    });
+
+    window.addEventListener('click', function (event) {
+      if (event.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
+
+    // Array untuk menyimpan data pengguna
+    let users = [];
+
+    const form = document.getElementById('registration-form');
+    const userList = document.getElementById('user-list');
+    const userTableBody = document.getElementById('user-table-body');
+
+    // Event listener untuk menambahkan pengguna baru
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const age = document.getElementById('age').value;
+      const user = { username, email, age };
+
+      users.push(user);
+      displayUsers();
+      form.reset();
+    });
+
+    function displayUsers() {
+      userTableBody.innerHTML = '';
+      users.forEach((user, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${user.username}</td>
+          <td>${user.email}</td>
+          <td>${user.age}</td>
+          <td>
+            <button onclick="editUser(${index})">Edit</button>
+            <button onclick="deleteUser(${index})">Hapus</button>
+          </td>
+        `;
+        userTableBody.appendChild(row);
+      });
+      userList.style.display = users.length > 0 ? 'block' : 'none';
+    }
+
+    function deleteUser(index) {
+      users.splice(index, 1);
+      displayUsers();
+    }
+
+    function editUser(index) {
+      const user = users[index];
+      document.getElementById('username').value = user.username;
+      document.getElementById('email').value = user.email;
+      document.getElementById('age').value = user.age;
+
+      form.querySelector('button[type="submit"]').textContent = 'Update';
+      form.removeEventListener('submit', handleFormSubmit);
+      form.addEventListener('submit', function updateUser(event) {
+        event.preventDefault();
+        users[index] = {
+          username: document.getElementById('username').value,
+          email: document.getElementById('email').value,
+          age: document.getElementById('age').value,
+        };
+        displayUsers();
+        form.reset();
+        form.querySelector('button[type="submit"]').textContent = 'Daftar';
+        form.removeEventListener('submit', updateUser);
+        form.addEventListener('submit', handleFormSubmit);
+      });
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const age = document.getElementById('age').value;
+      const user = { username, email, age };
+      users.push(user);
+      displayUsers();
+      form.reset();
+    }
+
+    form.addEventListener('submit', handleFormSubmit);
+  </script>
+</body>
+</html>
